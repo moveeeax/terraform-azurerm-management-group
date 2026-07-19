@@ -9,7 +9,7 @@ RBAC assignments.
 
 ```hcl
 module "management_group" {
-  source = "github.com/cybercapybara/terraform-azurerm-management-group"
+  source = "github.com/moveeeax/terraform-azurerm-management-group"
 
   name         = "platform"
   display_name = "Platform"
