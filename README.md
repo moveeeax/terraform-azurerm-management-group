@@ -9,7 +9,7 @@ RBAC assignments.
 
 ```hcl
 module "management_group" {
-  source = "github.com/moveeeax/terraform-azurerm-management-group"
+  source = "github.com/moveeeax/terraform-azurerm-management-group?ref=v1.0.0"
 
   name         = "platform"
   display_name = "Platform"
@@ -27,14 +27,14 @@ module "management_group" {
 
 ```hcl
 module "platform" {
-  source = "github.com/moveeeax/terraform-azurerm-management-group"
+  source = "github.com/moveeeax/terraform-azurerm-management-group?ref=v1.0.0"
 
   name         = "platform"
   display_name = "Platform"
 }
 
 module "workloads" {
-  source = "github.com/moveeeax/terraform-azurerm-management-group"
+  source = "github.com/moveeeax/terraform-azurerm-management-group?ref=v1.0.0"
 
   name                       = "platform-workloads"
   display_name               = "Platform Workloads"
@@ -93,11 +93,13 @@ Two further destructive edges, both inherent to the resource:
 | Name      | Version  |
 |-----------|----------|
 | terraform | >= 1.5   |
-| azurerm   | >= 3.0   |
+| azurerm   | >= 3.0, < 6.0 |
 
 `azurerm >= 3.0` is the real floor: `name`, `display_name`,
 `parent_management_group_id` and `subscription_ids` all exist with their current
-shape and semantics from 3.0.0 onwards, and the module plans unchanged on 4.x.
+shape and semantics from 3.0.0 onwards, and the module plans unchanged on 4.x
+and 5.x. CI validates and tests against 3.0.0 and the latest 5.x release; 6.x is
+excluded until it has been tested.
 The test suite additionally needs Terraform/OpenTofu >= 1.7 for `mock_provider`,
 but the module itself does not.
 
